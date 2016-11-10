@@ -4,11 +4,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.layout.StackPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.javafx.jfxclient.example.jfxintegrity.BaseFxmlController;
 import ru.javafx.jfxclient.example.jfxintegrity.FXMLController;
+import ru.javafx.jfxclient.example.jfxintegrity.Loadable;
 
 @FXMLController(css = {"/styles/Styles.css"})
 public class MainController extends BaseFxmlController implements Initializable {
@@ -19,7 +20,7 @@ public class MainController extends BaseFxmlController implements Initializable 
     private ExplorerController explorerController;
           
     @FXML
-    private StackPane mainWindow;
+    private TabPane tabPane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {        
@@ -27,9 +28,12 @@ public class MainController extends BaseFxmlController implements Initializable 
         System.out.println(explorerController);
     }
     
-    public void show(Node view) {
-        mainWindow.getChildren().clear();
-        mainWindow.getChildren().add(view);
+    public void show(Loadable controller) {
+        Tab tab = new Tab();
+        tab.setClosable(true);
+        tab.textProperty().bind(controller.titleProperty());
+        tab.setContent(controller.getView());
+        tabPane.getTabs().add(tab);       
     }
 
     @Override

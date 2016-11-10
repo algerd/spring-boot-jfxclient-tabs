@@ -7,8 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import ru.javafx.jfxclient.example.StageService;
 import ru.javafx.jfxclient.example.jfxintegrity.BaseFxmlController;
 import ru.javafx.jfxclient.example.jfxintegrity.FXMLController;
 
@@ -20,9 +18,6 @@ public class MenuController extends BaseFxmlController implements Initializable 
     
     @Autowired
     private RequestViewService requestViewService;
-    
-    @Autowired
-    private StageService stageService;
     
     @FXML
     private AnchorPane menu;
@@ -36,19 +31,19 @@ public class MenuController extends BaseFxmlController implements Initializable 
     @FXML
     private void showArtists() {
         System.out.println("showArtists");
-        requestViewService.artist();
+        requestViewService.show(ArtistController.class);
     }
     
     @FXML
     private void showAlbums() {
         System.out.println("showAlbums");  
-        requestViewService.album();
+        requestViewService.show(ArtistController.class);
     }
         
     @FXML
     private void showDialog() {
         System.out.println("showDialog");  
-        stageService.show(Modality.WINDOW_MODAL, DialogController.class);
+        requestViewService.show(DialogController.class, Modality.WINDOW_MODAL);
     }
 
     @Override

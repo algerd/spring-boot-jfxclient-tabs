@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,7 @@ public class BaseFxmlController implements Loadable {
     protected URL fxmlPath; 
     protected ResourceBundle resourceBundle;
     protected FXMLLoader fxmlLoader;
+    protected StringProperty title = new SimpleStringProperty();
     
     @Autowired
     private ControllerFactory controllerFactory;
@@ -135,5 +138,22 @@ public class BaseFxmlController implements Loadable {
     public ResourceBundle getResourceBundle() {
 		return resourceBundle;
 	}
+
+    @Override
+    public void setTitle(String title) {
+	    this.title.setValue(title);
+	}
+    
+    @Override
+    public String getTitle() {
+	    return this.title.getValue();
+	}
+	
+    @Override
+	public StringProperty titleProperty() {
+	    return title;
+	}
+    
+    
     
 }

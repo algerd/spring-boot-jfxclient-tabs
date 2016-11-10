@@ -2,6 +2,7 @@
 package ru.javafx.jfxclient.example.jfxintegrity;
 
 import java.util.ResourceBundle;
+import javafx.beans.property.StringProperty;
 import javafx.scene.Parent;
 
 public interface Loadable {
@@ -14,5 +15,9 @@ public interface Loadable {
     void setView(Parent view);
     
     ResourceBundle getResourceBundle();
+    
+    void setTitle(String title);     
+    String getTitle();	
+	StringProperty titleProperty();
     
 }
