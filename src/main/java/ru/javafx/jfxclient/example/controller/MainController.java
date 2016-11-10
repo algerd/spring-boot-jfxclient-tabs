@@ -30,9 +30,9 @@ public class MainController extends BaseFxmlController implements Initializable 
     
     public void show(Loadable controller) {
         Tab tab = new Tab();
-        tab.setClosable(true);
+        tab.setClosable(true); 
         tab.textProperty().bind(controller.titleProperty());
-        tab.setContent(controller.getView());
+        tab.setContent(controller.getView());     
         tabPane.getTabs().add(tab);       
     }
 

@@ -6,9 +6,7 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.Parent;
 
 public interface Loadable {
-    
-    Parent loadView();
-    
+      
     Parent getView();
        
     // только для инклудных вьюх с @FXMLController(loadable = false)

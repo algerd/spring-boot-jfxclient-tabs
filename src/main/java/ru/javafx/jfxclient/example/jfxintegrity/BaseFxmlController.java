@@ -41,21 +41,7 @@ public class BaseFxmlController implements Loadable {
         fxmlPath = getClass().getResource(getStringFxmlPath());      
 		resourceBundle = getResourceBundle(getBundleName());
 	}
-    
-    // Возвращает ранее созданный вид?
-    // Может имеет смысл сохранять в отдельном поле view ранее загруженный вид?
-    // Для диалоговых контроллеров не надо сохранть вьюху, а каждый раз загружать новую.
-    @Override
-    public Parent loadView() {
-		if (fxmlLoader == null) {
-			fxmlLoader = load(fxmlPath, resourceBundle);
-		}
-		Parent parent = fxmlLoader.getRoot();
-		addCss(parent);
-		return parent;
-	}
-    
-    // Только для сеттерный контроллеров-вьюх
+       
     @Override
     public Parent getView() {
         if (view == null && getFxmlAnnotation().loadable()) {
@@ -73,6 +59,15 @@ public class BaseFxmlController implements Loadable {
             addCss(this.view);
         }
     }
+    
+    private Parent loadView() {
+		if (fxmlLoader == null) {
+			fxmlLoader = load(fxmlPath, resourceBundle);
+		}
+		Parent parent = fxmlLoader.getRoot();
+		addCss(parent);
+		return parent;
+	}
           
     private FXMLLoader load(URL resource, ResourceBundle bundle) throws IllegalStateException {
 		FXMLLoader loader = new FXMLLoader(resource, bundle);
@@ -141,19 +136,17 @@ public class BaseFxmlController implements Loadable {
 
     @Override
     public void setTitle(String title) {
-	    this.title.setValue(title);
+	    this.title.set(title);
 	}
     
     @Override
     public String getTitle() {
-	    return this.title.getValue();
+	    return title.get();
 	}
 	
     @Override
 	public StringProperty titleProperty() {
 	    return title;
 	}
-    
-    
-    
+       
 }

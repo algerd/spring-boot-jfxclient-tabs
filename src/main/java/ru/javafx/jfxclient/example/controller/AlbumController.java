@@ -12,9 +12,13 @@ import ru.javafx.jfxclient.example.jfxintegrity.FXMLController;
 @Scope("prototype")
 public class AlbumController extends BaseFxmlController implements Initializable {
 
+    public AlbumController() {
+        super();
+        super.setTitle("Album");
+    }
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setTitle("Album");
     }
         
 }

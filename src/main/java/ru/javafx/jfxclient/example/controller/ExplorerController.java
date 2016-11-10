@@ -36,7 +36,7 @@ public class ExplorerController extends BaseFxmlController implements Initializa
     @FXML
     private void showAlbums() {
         System.out.println("showAlbums"); 
-        requestViewService.show(ArtistController.class);
+        requestViewService.show(AlbumController.class);
 
     }
     
