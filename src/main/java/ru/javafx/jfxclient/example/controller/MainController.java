@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ru.javafx.jfxclient.example.jfxintegrity.BaseFxmlController;
 import ru.javafx.jfxclient.example.jfxintegrity.FXMLController;
 import ru.javafx.jfxclient.example.jfxintegrity.Loadable;
+import ru.javafx.jfxclient.example.utils.TabPaneDetacher;
 
 @FXMLController(css = {"/styles/Styles.css"})
 public class MainController extends BaseFxmlController implements Initializable {
@@ -26,6 +27,7 @@ public class MainController extends BaseFxmlController implements Initializable 
     public void initialize(URL location, ResourceBundle resources) {        
         System.out.println(menuController);
         System.out.println(explorerController);
+        TabPaneDetacher.create().makeTabsDetachable(tabPane);
     }
     
     public void show(Loadable controller) {

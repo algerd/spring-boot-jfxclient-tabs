@@ -118,25 +118,25 @@ public class TabPaneDetacher {
             t.setClosable(false);
         });
         tabPane.setOnDragDetected(
-                (MouseEvent event) -> {
-                    if (event.getSource() instanceof TabPane) {
-                        Pane rootPane = (Pane) tabPane.getScene().getRoot();
-                        rootPane.setOnDragOver((DragEvent event1) -> {
-                            event1.acceptTransferModes(TransferMode.ANY);
-                            event1.consume();
-                        });
-                        currentTab = tabPane.getSelectionModel().getSelectedItem();
-                        SnapshotParameters snapshotParams = new SnapshotParameters();
-                        snapshotParams.setTransform(Transform.scale(0.4, 0.4));
-                        WritableImage snapshot = currentTab.getContent().snapshot(snapshotParams, null);
-                        Dragboard db = tabPane.startDragAndDrop(TransferMode.MOVE);
-                        ClipboardContent clipboardContent = new ClipboardContent();
-                        clipboardContent.put(DataFormat.PLAIN_TEXT, "detach");
-                        db.setDragView(snapshot, 40, 40);
-                        db.setContent(clipboardContent);
-                    }
-                    event.consume();
+            (MouseEvent event) -> {
+                if (event.getSource() instanceof TabPane) {
+                    Pane rootPane = (Pane) tabPane.getScene().getRoot();
+                    rootPane.setOnDragOver((DragEvent event1) -> {
+                        event1.acceptTransferModes(TransferMode.ANY);
+                        event1.consume();
+                    });
+                    currentTab = tabPane.getSelectionModel().getSelectedItem();
+                    SnapshotParameters snapshotParams = new SnapshotParameters();
+                    snapshotParams.setTransform(Transform.scale(0.4, 0.4));
+                    WritableImage snapshot = currentTab.getContent().snapshot(snapshotParams, null);
+                    Dragboard db = tabPane.startDragAndDrop(TransferMode.MOVE);
+                    ClipboardContent clipboardContent = new ClipboardContent();
+                    clipboardContent.put(DataFormat.PLAIN_TEXT, "detach");
+                    db.setDragView(snapshot, 40, 40);
+                    db.setContent(clipboardContent);
                 }
+                event.consume();
+            }
         );
         tabPane.setOnDragDone(
                 (DragEvent event) -> {

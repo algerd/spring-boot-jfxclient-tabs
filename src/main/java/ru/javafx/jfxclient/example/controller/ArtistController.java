@@ -8,15 +8,10 @@ import org.springframework.context.annotation.Scope;
 import ru.javafx.jfxclient.example.jfxintegrity.BaseFxmlController;
 import ru.javafx.jfxclient.example.jfxintegrity.FXMLController;
 
-@FXMLController
+@FXMLController(title = "Artist")
 @Scope("prototype")
 public class ArtistController extends BaseFxmlController implements Initializable {
-    
-    public ArtistController() {
-        super();
-        super.setTitle("Artist");
-    }
-    
+        
     @Override
     public void initialize(URL location, ResourceBundle resources) {       
     }

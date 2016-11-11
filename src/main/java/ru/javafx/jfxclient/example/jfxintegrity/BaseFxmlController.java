@@ -17,8 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
         @FXMLController("/fxml/somepath/someview.fxml")
         @FXMLController(
             value = "/fxml/somepath/main.fxml", // fxml-view path
-            css = ({"/styles/somepath/style1.css", "/fxml/somepath/style2.css"}) // array css pathes
-            bundle = ("...")
+            css = ({"/styles/somepath/style1.css", "/fxml/somepath/style2.css"}), // array css pathes
+            bundle = ("..."),
+            tittle = "Some Controller"
         }
     Если не задавать пути вьюхи и css, то они будут искаться соответственно в папках /fxml/ и /styles/ по
     имени контроллера без суффикса controller: SomeController будет искать /fxml/Some.fxml и /styles/Some.css
@@ -40,6 +41,7 @@ public class BaseFxmlController implements Loadable {
     public BaseFxmlController() {  
         fxmlPath = getClass().getResource(getStringFxmlPath());      
 		resourceBundle = getResourceBundle(getBundleName());
+        title.set(getFxmlAnnotation().title());
 	}
        
     @Override
@@ -133,7 +135,7 @@ public class BaseFxmlController implements Loadable {
     public ResourceBundle getResourceBundle() {
 		return resourceBundle;
 	}
-
+    
     @Override
     public void setTitle(String title) {
 	    this.title.set(title);
