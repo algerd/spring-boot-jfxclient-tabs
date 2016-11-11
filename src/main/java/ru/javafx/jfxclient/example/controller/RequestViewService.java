@@ -17,6 +17,9 @@ public class RequestViewService {
     
     @Autowired
     private ApplicationContext applicationContext;
+    
+    //@Autowired
+    //private Stage primaryStage;
         
     public void show(Class<? extends BaseFxmlController> controllerClass) {
         mainController.show(applicationContext.getBean(controllerClass));
@@ -25,10 +28,11 @@ public class RequestViewService {
     public void show(Class<? extends BaseFxmlController> controllerClass, Modality modality) {       
         Stage stage = new Stage();           
         stage.initModality(modality);
+        //stage.initOwner(primaryStage);
         stage.initOwner(applicationContext.getBean("primaryStage", Stage.class));
         Scene scene = new Scene(applicationContext.getBean(controllerClass).getView()); 
         stage.setScene(scene);
         stage.showAndWait();
     }
-
+    
 }

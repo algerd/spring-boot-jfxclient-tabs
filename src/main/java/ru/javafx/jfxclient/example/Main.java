@@ -13,7 +13,6 @@ import ru.javafx.jfxclient.example.jfxintegrity.BaseFxmlController;
 public class Main extends Application {
     
     private ConfigurableApplicationContext springContext;
-    private Stage primaryStage;
     
     @Override
     public void init() throws Exception {
@@ -36,11 +35,7 @@ public class Main extends Application {
         super.stop();
         springContext.close();
     }
-
-    public Stage getPrimaryStage() {
-        return primaryStage;
-    }
-    
+   
     public static void main(String[] args) {
         Application.launch(args);
     }
