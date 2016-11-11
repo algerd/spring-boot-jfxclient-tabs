@@ -25,8 +25,8 @@ public class Main extends Application {
         springContext.getBeanFactory().registerSingleton("primaryStage", stage);
         
         BaseFxmlController mainController = springContext.getBean(MainController.class);    
-        Scene scene = new Scene(mainController.getView());       
-        stage.setTitle("Example of JavaFx with Spring Boot ");
+        Scene scene = new Scene(mainController.getView());  
+        stage.titleProperty().bind(mainController.titleProperty());
         stage.setScene(scene);     
         stage.show();
     }

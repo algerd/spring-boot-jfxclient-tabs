@@ -12,7 +12,9 @@ import ru.javafx.jfxclient.example.jfxintegrity.FXMLController;
 import ru.javafx.jfxclient.example.jfxintegrity.Loadable;
 import ru.javafx.jfxclient.example.utils.TabPaneDetacher;
 
-@FXMLController(css = {"/styles/Styles.css"})
+@FXMLController(
+    css = {"/styles/Styles.css"},
+    title = "Example of JavaFx with Spring Boot ")
 public class MainController extends BaseFxmlController implements Initializable {
       
     @Autowired

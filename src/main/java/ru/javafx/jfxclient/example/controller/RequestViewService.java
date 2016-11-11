@@ -30,7 +30,5 @@ public class RequestViewService {
         stage.setScene(scene);
         stage.showAndWait();
     }
-    
-    
 
 }
