@@ -20,14 +20,14 @@ import ru.javafx.jfxclient.example.jfxintegrity.BaseFxmlController;
 Дополнительная логика для Stage вплетена в метод showStage(), главный контроллер жёстко прописан в коде.
 */
 //@SpringBootApplication
-public class Main extends Application {
+public class MainSpringBoot extends Application {
     
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private ConfigurableApplicationContext springContext;
     
     @Override
     public void init() throws Exception {
-        springContext = SpringApplication.run(Main.class);      
+        springContext = SpringApplication.run(MainSpringBoot.class);      
     }
     
     @Override

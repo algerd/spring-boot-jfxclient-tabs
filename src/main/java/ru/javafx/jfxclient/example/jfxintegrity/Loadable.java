@@ -9,7 +9,7 @@ public interface Loadable {
       
     Parent getView();
        
-    // только для инклудных вьюх с @FXMLController(loadable = false)
+    // only for included views with @FXMLController(loadable = false)
     void setView(Parent view);
     
     ResourceBundle getResourceBundle();

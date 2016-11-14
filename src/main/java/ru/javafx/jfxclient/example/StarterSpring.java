@@ -1,8 +1,8 @@
 package ru.javafx.jfxclient.example;
 
-import ru.javafx.jfxclient.example.jfxintegrity.BaseSpringBootJavaFxApplication;
 import javafx.scene.image.Image;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.javafx.jfxclient.example.controller.ArtistController;
 import ru.javafx.jfxclient.example.controller.MainController;
 import ru.javafx.jfxclient.example.controller.RequestViewService;
@@ -16,7 +16,12 @@ import ru.javafx.jfxclient.example.jfxintegrity.BaseSpringJavaFxApplication;
 public class StarterSpring extends BaseSpringJavaFxApplication {
 	
 	public static void main(String[] args) {
-		launchApp(StarterSpring.class, MainController.class, args);
+		launchApp(
+            StarterSpring.class, 
+            MainController.class, 
+            new AnnotationConfigApplicationContext("ru.javafx.jfxclient.example"),
+            args
+        );
 	}
     
     @Autowired

@@ -8,20 +8,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public abstract class BaseSpringJavaFxApplication  extends Application {
+public abstract class BaseSpringJavaFxApplication extends Application {
     
     private static Class<? extends BaseFxmlController> mainController;  
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    protected AnnotationConfigApplicationContext springContext;
+    protected static AnnotationConfigApplicationContext springContext;
     protected Stage primaryStage;
-    
-    
+      
     public abstract void show();
-    
-    @Override
-    public void init() throws Exception {
-        springContext = new AnnotationConfigApplicationContext("ru.javafx.jfxclient.example");      
-    }
     
     @Override
     public void start(Stage stage) throws Exception {  
@@ -46,8 +40,10 @@ public abstract class BaseSpringJavaFxApplication  extends Application {
     protected static void launchApp(
             Class<? extends BaseSpringJavaFxApplication> appClass,
 			Class<? extends BaseFxmlController> mainController, 
+            AnnotationConfigApplicationContext springContext,
             String[] args) {
         
+        BaseSpringJavaFxApplication.springContext = springContext;
 		BaseSpringJavaFxApplication.mainController = mainController;
 		Application.launch(appClass, args);
 	}
