@@ -13,7 +13,7 @@ import ru.javafx.jfxclient.example.controller.RequestViewService;
 (В BaseSpringBootJavaFxApplication бин Stage зарегистрирован в start() методе через springContext.getBeanFactory().registerSingleton())
 Дополнительная логика для Stage вынесена в @Override метод show(), главный контроллер передаётся серез метод-лаунчер.
 */
-//@SpringBootApplication
+@SpringBootApplication
 public class StarterSpringBoot extends BaseSpringBootJavaFxApplication {
 	
 	public static void main(String[] args) {

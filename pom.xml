@@ -3,10 +3,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.javafx</groupId>
-    <artifactId>spring-boot-jfxclient-tabs</artifactId>
+    <artifactId>spring-javafx-integrity-example</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>spring-boot-jfxclient-tabs</name>
+    <name>spring-javafx-integrity-example</name>
     <description>Example of JavaFX client with Spring Boot</description>
 
     <properties>
