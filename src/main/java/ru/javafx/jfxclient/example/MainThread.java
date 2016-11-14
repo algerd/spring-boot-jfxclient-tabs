@@ -24,7 +24,7 @@ import ru.javafx.jfxclient.example.jfxintegrity.BaseFxmlController;
 Это позволяет создать бин Stage.
 Дополнительная логика для Stage вплетена в метод showStage(), главный контроллер жёстко прописан в коде.
 */
-@SpringBootApplication
+//@SpringBootApplication
 public class MainThread extends Application {
     
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

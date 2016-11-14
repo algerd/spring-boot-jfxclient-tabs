@@ -14,9 +14,9 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import ru.javafx.jfxclient.example.jfxintegrity.BaseFxmlController;
 
-public abstract class BaseJavaFxApplicationThread extends Application {
+public abstract class BaseSpringBootJavaFxApplicationThread extends Application {
       
-    private static Class<? extends BaseJavaFxApplicationThread> appClass;
+    private static Class<? extends BaseSpringBootJavaFxApplicationThread> appClass;
     private static String[] args;
     private static Class<? extends BaseFxmlController> mainController;
     
@@ -73,13 +73,13 @@ public abstract class BaseJavaFxApplicationThread extends Application {
     }
 
     protected static void launchApp(
-            Class<? extends BaseJavaFxApplicationThread> appClass,
+            Class<? extends BaseSpringBootJavaFxApplicationThread> appClass,
 			Class<? extends BaseFxmlController> mainController, 
             String[] args) {
         
-        BaseJavaFxApplicationThread.appClass = appClass;
-		BaseJavaFxApplicationThread.mainController = mainController;
-		BaseJavaFxApplicationThread.args = args;
+        BaseSpringBootJavaFxApplicationThread.appClass = appClass;
+		BaseSpringBootJavaFxApplicationThread.mainController = mainController;
+		BaseSpringBootJavaFxApplicationThread.args = args;
 		Application.launch(appClass, args);
 	}
 

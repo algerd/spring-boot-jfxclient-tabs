@@ -8,13 +8,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-public abstract class BaseJavaFxApplication extends Application {
+public abstract class BaseSpringBootJavaFxApplication extends Application {
     
-    private static Class<? extends BaseJavaFxApplication> appClass;
+    private static Class<? extends BaseSpringBootJavaFxApplication> appClass;
     private static String[] args;
     private static Class<? extends BaseFxmlController> mainController;
     
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     protected ConfigurableApplicationContext springContext;
     protected Stage primaryStage;
     
@@ -45,13 +45,13 @@ public abstract class BaseJavaFxApplication extends Application {
     }
     
     protected static void launchApp(
-            Class<? extends BaseJavaFxApplication> appClass,
+            Class<? extends BaseSpringBootJavaFxApplication> appClass,
 			Class<? extends BaseFxmlController> mainController, 
             String[] args) {
         
-        BaseJavaFxApplication.appClass = appClass;
-		BaseJavaFxApplication.mainController = mainController;
-		BaseJavaFxApplication.args = args;
+        BaseSpringBootJavaFxApplication.appClass = appClass;
+		BaseSpringBootJavaFxApplication.mainController = mainController;
+		BaseSpringBootJavaFxApplication.args = args;
 		Application.launch(appClass, args);
 	}
    
