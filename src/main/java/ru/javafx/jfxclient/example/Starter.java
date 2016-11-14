@@ -2,6 +2,8 @@ package ru.javafx.jfxclient.example;
 
 import ru.javafx.jfxclient.example.jfxintegrity.BaseSpringBootJavaFxApplication;
 import javafx.scene.image.Image;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import ru.javafx.jfxclient.example.controller.ArtistController;
 import ru.javafx.jfxclient.example.controller.MainController;
 import ru.javafx.jfxclient.example.controller.RequestViewService;
@@ -17,10 +19,13 @@ public class Starter extends BaseSpringBootJavaFxApplication {
 	public static void main(String[] args) {
 		launchApp(Starter.class, MainController.class, args);
 	}
+    
+    @Autowired
+    private RequestViewService requestViewService;
 
     @Override
     public void show() {
-        springContext.getBean(RequestViewService.class).show(ArtistController.class);
+        requestViewService.show(ArtistController.class);
         primaryStage.getIcons().add(new Image("images/icon_root_layout.png"));        
     }
 	

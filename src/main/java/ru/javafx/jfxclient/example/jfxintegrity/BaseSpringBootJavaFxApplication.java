@@ -29,6 +29,7 @@ public abstract class BaseSpringBootJavaFxApplication extends Application {
     public void start(Stage stage) throws Exception {  
         primaryStage = stage;
         springContext.getBeanFactory().registerSingleton("primaryStage", primaryStage);
+        springContext.getAutowireCapableBeanFactory().autowireBean(this);
         
         BaseFxmlController controller = springContext.getBean(mainController);    
         Scene scene = new Scene(controller.getView());  

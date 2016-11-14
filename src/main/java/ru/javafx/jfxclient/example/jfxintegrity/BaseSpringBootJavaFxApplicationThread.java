@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import ru.javafx.jfxclient.example.jfxintegrity.BaseFxmlController;
 
 public abstract class BaseSpringBootJavaFxApplicationThread extends Application {
       
@@ -41,12 +40,14 @@ public abstract class BaseSpringBootJavaFxApplicationThread extends Application 
                 return null;
             }
         };
-        worker.run();  
+        worker.run();        
         worker.setOnSucceeded(event -> showStage());
         worker.setOnFailed(event -> showAlert());
     }
       
-    private void showStage() { 
+    private void showStage() {
+        springContext.getAutowireCapableBeanFactory().autowireBean(this);
+        
         BaseFxmlController controller = springContext.getBean(mainController);
         Scene scene = new Scene(controller.getView());
         primaryStage = springContext.getBean("primaryStage", Stage.class);
