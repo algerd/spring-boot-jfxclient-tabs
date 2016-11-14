@@ -5,6 +5,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.slf4j.Logger;
@@ -13,11 +14,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import ru.javafx.jfxclient.example.controller.ArtistController;
 import ru.javafx.jfxclient.example.controller.MainController;
+import ru.javafx.jfxclient.example.controller.RequestViewService;
 import ru.javafx.jfxclient.example.jfxintegrity.BaseFxmlController;
 
+/*
+Прямое создание Application класса с запуском приложения в одном потоке (Task<Object>).
+Это позволяет создать бин Stage.
+Дополнительная логика для Stage вплетена в метод showStage(), главный контроллер жёстко прописан в коде.
+*/
 @SpringBootApplication
-public class MainTask extends Application {
+public class MainThread extends Application {
     
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private static String[] args;
@@ -28,24 +36,13 @@ public class MainTask extends Application {
         Task<Object> worker = new Task<Object>() {
             @Override
             protected Object call() throws Exception {
-                springContext = SpringApplication.run(MainTask.class, MainTask.args);
+                springContext = SpringApplication.run(MainThread.class, MainThread.args);
                 return null;
             }
         };
         worker.run();  
-        worker.setOnSucceeded(event -> show(MainController.class));
-        worker.setOnFailed(event -> {
-            try {
-                this.logger.info("Application force stoped!");
-                Alert ex = new Alert(Alert.AlertType.ERROR);
-                ex.setTitle("ERROR");
-                ex.setHeaderText("Application force stoped!");
-                ex.setContentText("Application force stoped!");
-                ex.show();
-            } catch (Exception ex) {
-                this.logger.error("Application force stoped!", ex);
-            }
-        });
+        worker.setOnSucceeded(event -> showStage());
+        worker.setOnFailed(event -> showAlert());
     }
     
     @Bean("primaryStage")
@@ -54,13 +51,26 @@ public class MainTask extends Application {
         return newStage;
     }
    
-    private void show(Class<? extends BaseFxmlController> controllerClass) { 
-        BaseFxmlController controller = springContext.getBean(controllerClass);
+    private void showStage() { 
+        BaseFxmlController controller = springContext.getBean(MainController.class);
         Scene scene = new Scene(controller.getView());
         Stage primaryStage = springContext.getBean("primaryStage", Stage.class);
         primaryStage.titleProperty().bind(controller.titleProperty());
-        primaryStage.setScene(scene);     
+        primaryStage.setScene(scene);
+        // some logic
+        springContext.getBean(RequestViewService.class).show(ArtistController.class);
+        primaryStage.getIcons().add(new Image("images/icon_root_layout.png"));  
+        
         primaryStage.show();
+    }
+    
+    private void showAlert() {
+        logger.info("Application force stoped!");
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("ERROR");
+        alert.setHeaderText("Application force stoped!");
+        alert.setContentText("Application force stoped!");
+        alert.show();
     }
 
     @Override
@@ -71,8 +81,8 @@ public class MainTask extends Application {
     }
   
     public static void main(String[] args) {
-        MainTask.args = args;
-        launch(MainTask.class, args);
+        MainThread.args = args;
+        launch(MainThread.class, args);
     }
 
 }
