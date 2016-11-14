@@ -3,9 +3,10 @@ package ru.javafx.jfxclient.example.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.javafx.jfxclient.example.jfxintegrity.BaseFxmlController;
 import ru.javafx.jfxclient.example.jfxintegrity.FXMLController;
@@ -15,7 +16,9 @@ import ru.javafx.jfxclient.example.utils.TabPaneDetacher;
 @FXMLController(
     css = {"/styles/Styles.css"},
     title = "Example of JavaFx with Spring Boot ")
-public class MainController extends BaseFxmlController implements Initializable {
+public class MainController extends BaseFxmlController {
+    
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
       
     @Autowired
     private MenuController menuController;
@@ -27,8 +30,6 @@ public class MainController extends BaseFxmlController implements Initializable 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {        
-        System.out.println(menuController);
-        System.out.println(explorerController);
         TabPaneDetacher.create().makeTabsDetachable(tabPane);
     }
     
@@ -36,8 +37,9 @@ public class MainController extends BaseFxmlController implements Initializable 
         Tab tab = new Tab();
         tab.setClosable(true); 
         tab.textProperty().bind(controller.titleProperty());
-        tab.setContent(controller.getView());     
-        tabPane.getTabs().add(tab);       
+        tab.setContent(controller.getView()); 
+        tabPane.getTabs().add(tab); 
+        tabPane.getSelectionModel().selectLast();
     }
 
     @Override

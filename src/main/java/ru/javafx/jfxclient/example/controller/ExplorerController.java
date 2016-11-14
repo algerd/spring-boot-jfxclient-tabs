@@ -3,14 +3,17 @@ package ru.javafx.jfxclient.example.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.javafx.jfxclient.example.jfxintegrity.BaseFxmlController;
 import ru.javafx.jfxclient.example.jfxintegrity.FXMLController;
 
 @FXMLController(loadable = false)
-public class ExplorerController extends BaseFxmlController implements Initializable {
+public class ExplorerController extends BaseFxmlController {
+    
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
     @FXML
     private AnchorPane explorer;
@@ -24,18 +27,18 @@ public class ExplorerController extends BaseFxmlController implements Initializa
     @Override
     public void initialize(URL url, ResourceBundle rb) {  
         super.setView(explorer);
-        System.out.println("ExplorerController: " + parentController);
+        logger.info("ExplorerController: " + parentController);
     } 
     
     @FXML
     private void showArtists() {
-        System.out.println("showArtists");
+        logger.info("showArtists");
         requestViewService.show(ArtistController.class);
     }
     
     @FXML
     private void showAlbums() {
-        System.out.println("showAlbums"); 
+        logger.info("showAlbums"); 
         requestViewService.show(AlbumController.class);
 
     }

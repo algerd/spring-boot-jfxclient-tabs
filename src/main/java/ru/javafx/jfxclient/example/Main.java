@@ -3,15 +3,18 @@ package ru.javafx.jfxclient.example;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import ru.javafx.jfxclient.example.controller.MainController;
 import ru.javafx.jfxclient.example.jfxintegrity.BaseFxmlController;
 
-@SpringBootApplication
+//@SpringBootApplication
 public class Main extends Application {
     
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private ConfigurableApplicationContext springContext;
     
     @Override

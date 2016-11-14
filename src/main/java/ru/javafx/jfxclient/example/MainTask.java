@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Bean;
 import ru.javafx.jfxclient.example.controller.MainController;
 import ru.javafx.jfxclient.example.jfxintegrity.BaseFxmlController;
 
-//@SpringBootApplication
+@SpringBootApplication
 public class MainTask extends Application {
     
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

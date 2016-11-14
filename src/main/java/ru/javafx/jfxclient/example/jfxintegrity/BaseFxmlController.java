@@ -8,7 +8,10 @@ import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /*
@@ -25,8 +28,9 @@ import org.springframework.beans.factory.annotation.Autowired;
     имени контроллера без суффикса controller: SomeController будет искать /fxml/Some.fxml и /styles/Some.css
 
 */
-public class BaseFxmlController implements Loadable {
+public abstract class BaseFxmlController implements Loadable, Initializable {
     
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private static final String FXML_PATH_ROOT = "/fxml/";
     private static final String CSS_PATH_ROOT = "/styles/";
     protected Parent view;
