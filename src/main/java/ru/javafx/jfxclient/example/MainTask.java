@@ -48,7 +48,7 @@ public class MainTask extends Application {
         });
     }
     
-    @Bean()
+    @Bean("primaryStage")
     public Stage getStage() {
         Stage newStage = new Stage(StageStyle.DECORATED);
         return newStage;
@@ -57,7 +57,7 @@ public class MainTask extends Application {
     private void show(Class<? extends BaseFxmlController> controllerClass) { 
         BaseFxmlController controller = springContext.getBean(controllerClass);
         Scene scene = new Scene(controller.getView());
-        Stage primaryStage = springContext.getBean(Stage.class);
+        Stage primaryStage = springContext.getBean("primaryStage", Stage.class);
         primaryStage.titleProperty().bind(controller.titleProperty());
         primaryStage.setScene(scene);     
         primaryStage.show();
