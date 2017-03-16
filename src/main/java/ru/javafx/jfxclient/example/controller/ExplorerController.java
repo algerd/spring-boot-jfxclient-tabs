@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
+import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,11 @@ public class ExplorerController extends BaseFxmlController {
     
     @Autowired
     private RequestViewService requestViewService;
+    
+    @PostConstruct
+    public void info() {
+        logger.info("created ExplorerController");
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {  

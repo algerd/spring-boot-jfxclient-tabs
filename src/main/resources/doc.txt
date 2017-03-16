@@ -32,7 +32,7 @@ If a class is specified in the fx:controller attribute, and no controller alread
 If one exists, then the controller is set as the result of passing the specified Class to the controllerFactory's call() method, 
 otherwise it is created by calling newInstance() on the specified class (effectively calling its no-argument constructor).
 
-Для иклудных контроллеров загрузчик вида и возвращаемый вид не нужны, поэтому нет смысла их наследовать от
+Для инклудных контроллеров загрузчик вида и возвращаемый вид не нужны, поэтому нет смысла их наследовать от
 суперконтроллера-загрузчика. И Соответственно нет смысла для них использовать специальныую аннотацию с указанием
 пути fxml-вида. Но как быть с css для инклудных контроллеров?
 
@@ -54,3 +54,12 @@ otherwise it is created by calling newInstance() on the specified class (effecti
 Для реализации многовкладочного интерфейса и перетягивания окон сеттерных вьюх, надо все сеттерные и диалоговые 
 контроллеры делать @Scope("prototype")
 
+Проблема: вьюхи Setted Controllers и Dialog Controllers не должны иметь ссылок на контроллеры, 
+если контроллер имеет @Scope("prototype"), иначе будут создаваться бины 2 раза, сначала по ссылке из вьюхи, а потом лоадером. 
+С синглтоном такой проблемы нет. Надо ввести проверку.
+Решение(кривое, но другое не нашёл):
+    - введено поле boolean isRefControllerInFxml в FXMLController, которое сигнализирует, что в fxml-файле есть ссылка на контроллер
+    - если isRefControllerInFxml = true и контроллер-прототип - выскакивает ошибка о недопустимости контроллера в fxml-файле
+    - если isRefControllerInFxml = true - используется loader.setControllerFactory(controllerFactory)
+    - если isRefControllerInFxml = false - используется loader.setController(this);
+Проблема: ошибка при задании isRefControllerInFxml и наличия коньроллера в fxml-файле

@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
+import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,11 @@ public class MenuController extends BaseFxmlController {
     
     @FXML
     private AnchorPane menu;
+    
+    @PostConstruct
+    public void info() {
+        logger.info("created MenuController");
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

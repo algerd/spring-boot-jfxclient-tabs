@@ -12,6 +12,7 @@ import ru.javafx.jfxclient.example.jfxintegrity.BaseFxmlController;
 import ru.javafx.jfxclient.example.jfxintegrity.FXMLController;
 import ru.javafx.jfxclient.example.jfxintegrity.Loadable;
 import ru.javafx.jfxclient.example.utils.TabPaneDetacher;
+import javax.annotation.PostConstruct;
 
 @FXMLController(
     css = {"/styles/Styles.css"},
@@ -27,9 +28,14 @@ public class MainController extends BaseFxmlController {
           
     @FXML
     private TabPane tabPane;
-
+    
+    @PostConstruct
+    public void info() {
+        logger.info("created MainController");
+    }
+    
     @Override
-    public void initialize(URL location, ResourceBundle resources) {        
+    public void initialize(URL location, ResourceBundle resources) {       
         TabPaneDetacher.create().makeTabsDetachable(tabPane);
     }
     

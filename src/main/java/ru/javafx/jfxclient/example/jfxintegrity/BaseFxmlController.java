@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 
 /*
     Пример аннотации контроллеров:
@@ -74,10 +75,23 @@ public abstract class BaseFxmlController implements Loadable, Initializable {
 		addCss(parent);
 		return parent;
 	}
-          
+    
+    private Scope getScopeAnnotation() {
+		return getClass().getAnnotation(Scope.class);
+	}
+         
     private FXMLLoader load(URL resource, ResourceBundle bundle) throws IllegalStateException {
 		FXMLLoader loader = new FXMLLoader(resource, bundle);
-        loader.setControllerFactory(controllerFactory);
+       
+        if (getFxmlAnnotation().isRefControllerInFxml()) {
+            if (getScopeAnnotation() != null && getScopeAnnotation().value().equals("prototype")) {
+                throw new IllegalStateException("Для Scope=prototype нельзя задавать контроллер в fxml-файле для " + getClass());
+            }          
+            loader.setControllerFactory(controllerFactory);
+        } else {
+            loader.setController(this);
+        }
+        
 		try {
 			loader.load();
 		} catch (IOException ex) {
